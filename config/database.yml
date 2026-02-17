@@ -6,11 +6,22 @@ default: &default
 development:
   <<: *default
   database: rj_project_development
+  username: postgres
+  password: <%= ENV['PG_PASSWORD'] %>
+  host: localhost
 
 test:
   <<: *default
   database: rj_project_test
+  username: postgres
+  password: <%= ENV['PG_PASSWORD'] %>
+  host: localhost
 
 production:
-  <<: *default
-  url: <%= ENV["DATABASE_URL"] %>
+  primary:
+    <<: *default
+    url: <%= ENV['DATABASE_URL'] %>
+
+  cable:
+    <<: *default
+    url: <%= ENV['DATABASE_URL'] %>
