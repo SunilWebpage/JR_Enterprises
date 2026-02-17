@@ -1,0 +1,86 @@
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+ 
+
+  <% if @products.present? %>
+
+ <div class="sm:flex sm:items-center">
+    <div class="sm:flex-auto">
+      <h1 class="text-2xl font-semibold text-gray-900">Products</h1>
+      <p class="mt-2 text-sm text-gray-700">A list of all the products in your store including their name, price, and stock status.</p>
+    </div>
+    <div class="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
+      <%= link_to "Add New Product", products_path, class: "inline-flex items-center justify-center rounded-md border border-transparent bg-blue-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 sm:w-auto" %>
+    </div>
+  </div>
+
+
+
+    <div class="mt-8 flex flex-col">
+      <div class="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
+        <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
+          <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
+            <table class="min-w-full divide-y divide-gray-300">
+              <thead class="bg-gray-50">
+                <tr>
+                  <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Image</th>
+                  <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Name</th>
+                  <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Price</th>
+                  <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Orders</th>
+                  <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Stock</th>
+                  <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
+                    <span class="sr-only">Actions</span>
+                  </th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-gray-200 bg-white">
+                <% @products.each do |product| %>
+                  <tr>
+                    <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">
+                      <div class="flex items-center">
+                        <div class="h-10 w-10 flex-shrink-0">
+                          <% if product.image.attached? %>
+                            <%= image_tag product.image, class: "h-10 w-10 rounded-full object-cover" %>
+                          <% else %>
+                            <div class="h-10 w-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-400">
+                              <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                            </div>
+                          <% end %>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="whitespace-nowrap px-3 py-4 text-sm font-medium text-gray-900"><%= product.name %></td>
+                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">$<%= product.price %></td>
+                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><%= product.order_count %></td>
+                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                      <span class="inline-flex rounded-full px-2 text-xs font-semibold leading-5 <%= product.quantity.to_i > 0 ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' %>">
+                        <%= product.quantity %>
+                      </span>
+                    </td>
+                    <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+                      <%= button_to product_path(product), method: :delete, data: { confirm: "Are you sure?" }, class: "text-red-600 hover:text-red-900 transition-colors" do %>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 2 0 00-1 1v3M4 7h16" />
+                        </svg>
+                      <% end %>
+                    </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% else %>
+    <div class="text-center mt-12">
+      <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+        <path vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 13h6m-3-3v6m-9 1V7a2 2 0 012-2h6l2 2h6a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
+      </svg>
+      <h3 class="mt-2 text-sm font-medium text-gray-900">No products</h3>
+      <p class="mt-1 text-sm text-gray-500">Get started by creating a new product.</p>
+      <div class="mt-6">
+        <%= link_to "Add New Product", products_path, class: "inline-flex items-center rounded-md border border-transparent bg-blue-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2" %>
+      </div>
+    </div>
+  <% end %>
+</div>

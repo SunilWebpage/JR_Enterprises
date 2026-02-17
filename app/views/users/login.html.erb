@@ -1,0 +1,31 @@
+<div class="bg-[url('bg2.png')] bg-cover bg-center">
+  <div class="p-5 h-[calc(100vh-0rem)] flex flex-col items-center justify-center  ">
+
+    <%= form_with url: login_path,local: true do |form| %>
+    <div class="flex flex-col gap-4 border border-gray-300 p-5 w-[500px] rounded-xl shadow-lg bg-[#F4F6F5]">
+
+      <div class="text-center font-light justify-center items-center flex">
+        <%= image_tag "logo.svg", class: "h-20 w-20 rounded-full" %> </div>
+
+      <div class="text-xl text-center">Login</div>
+      <div>
+        <%= form.label :email %>
+        <%= form.text_field :email,
+        class: "border border-gray-300 rounded mt-1 h-10 w-full pl-2" %>
+      </div>
+
+      <div>
+        <%= form.label :password %>
+        <%= form.password_field :password,
+        class: "border border-gray-300 rounded mt-1 h-10 w-full pl-2" %>
+      </div>
+      <%= form.submit "Login",class: "bg-blue-500 text-white px-4 py-2 rounded" %>
+      <% end %>
+      <div class="flex items-center justify-center gap-2">
+        <div>Don't have an account?</div>
+        <%= link_to "Register", users_path, class: "text-blue-500" %>
+      </div>
+
+    </div>
+  </div>
+</div>

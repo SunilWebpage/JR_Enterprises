@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: MyString
+  reference: MyString
+  product: MyString
+  reference: MyString
+  quantity: 1
+
+two:
+  user: MyString
+  reference: MyString
+  product: MyString
+  reference: MyString
+  quantity: 1
