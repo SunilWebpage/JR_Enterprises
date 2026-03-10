@@ -11,7 +11,7 @@ gem "importmap-rails"
 gem "turbo-rails"
 gem "stimulus-rails"
 gem "jbuilder"
-gem "pg"
+gem 'mysql2', '>= 0.5'
 
 
 
