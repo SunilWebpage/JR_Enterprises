@@ -5,15 +5,14 @@ class UsersController < ApplicationController
     session[:user_id] = nil
   end
 
-  def create
-    @user = User.new(user_params)
-    if @user.save
-      redirect_to login_path, notice: "Registered Successfully"
-    else
-      @users = User.all
-      render :index, status: :unprocessable_entity
-    end
+def create
+  @user = User.new(user_params)
+  if @user.save(validate: false)  # skips validations
+    redirect_to users_path, notice: "User created!"
+  else
+    render :index, status: :unprocessable_entity
   end
+end
 
 def profile
   @user = User.find(params[:id])

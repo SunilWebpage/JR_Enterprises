@@ -1,6 +1,4 @@
 class ProductsController < ApplicationController
-
-
   def index
     @products = Product.all
     @product = Product.new
@@ -9,7 +7,7 @@ class ProductsController < ApplicationController
 def create
   @product = Product.new(product_params)
 
-  if @product.save
+  if @product.save(validate: false)
     redirect_to items_path(@product.id), notice: "Product created successfully"
   else
     @products = Product.all
@@ -29,7 +27,7 @@ def productview
   @product = Product.find(params[:id])
    if current_user
     @already_in_cart = Cart.exists?(user_id: current_user.id, product_id: @product.id)
-  end
+   end
 end
 
 def destroy
